@@ -12,9 +12,13 @@ def most_contested_markets(n=10):
     for market in markets:
         yes_bid = market.get("yes_bid_dollars")
         no_bid = market.get("no_bid_dollars")
+
+        yes_ask = market.get("yes_ask_dollars")
+        no_ask = market.get("no_ask_dollars")
+
         ticker = market.get("ticker")
         title = market.get("title", "Unknown")
-        yes_price = market.get("yes_ask_dollars")
+        volume = market.get("volume_fp")
 
         if yes_price is None:
             continue
