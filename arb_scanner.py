@@ -29,8 +29,8 @@ def most_contested_markets(n=10):
         contested.append({
             "ticker": ticker,
             "title": title,
-            "yes_bid": market.get("yes_bid_dollars"),
-            "yes_ask": yes_price,
+            "yes_bid": yes_bid,
+            "yes_ask": yes_ask,
             "no_bid": market.get("no_bid_dollars"),
             "no_ask": market.get("no_ask_dollars"),
             "volume": market.get("volume_fp"),
