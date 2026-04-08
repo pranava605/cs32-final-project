@@ -14,6 +14,12 @@ BASE_URL = "https://trading-api.kalshi.com/trade-api/v2"
 KEY_ID = os.getenv("KALSHI_KEY_ID")
 PRIVATE_KEY_PATH = os.getenv("KALSHI_PRIVATE_KEY_PATH")
 
+print(f"KEY_ID: {KEY_ID}")
+print(f"KEY_PATH: {PRIVATE_KEY_PATH}")
+
+with open(PRIVATE_KEY_PATH, "rb") as f:
+    PRIVATE_KEY = serialization.load_pem_private_key(f.read(), password = None)
+
 # This sets up the communication path btwn Kalshi and our script
 def sign_request(method, path):
     timestamp = str(int(time.time() * 1000))
@@ -38,10 +44,11 @@ def get_headers(method, path):
     }
 
 def get_markets(limit=100):
+    path = "/trade-api/v2/markets"
     try:
         response = requests.get(
             f"{BASE_URL}/markets",
-            headers = HEADERS,
+            headers = get_headers("GET", path),
             params = {"status": "open", "limit": limit}
         )
         response.raise_for_status()
