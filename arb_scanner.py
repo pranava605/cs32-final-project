@@ -23,7 +23,10 @@ def most_contested_markets(n=10):
         if yes_ask is None:
             continue
 
+        # makes sure yes_ask is a number not a string
         yes_ask = float(yes_ask)
+
+        # closer to 0.5 the more contested the outcome
         distance_from_50 = abs(yes_ask - 0.50)
 
         contested.append({
@@ -34,6 +37,7 @@ def most_contested_markets(n=10):
             "volume": volume,
             "distance_from_50": round(distance_from_50, 4)})
 
+    # sort by markets closest to 50/50 probabilities
     df = pd.DataFrame(contested)
     df = df.sort_values("distance_from_50", ascending=True)
     return df.head(n)
@@ -47,6 +51,8 @@ if __name__ == "__main__":
             print(f"{'='*50}")
             print(f"  Ticker:  {row['ticker']}")
             print(f"  Title:   {row['title']}")
+
+            # display prices in cents and multiply by 100. note that the float makes sure they are numbers
             print(f"  Yes Ask: {float(row['yes_ask'])*100:.0f}c  |  No Bid: {float(row['no_bid'])*100:.0f}c")
             print(f"  Volume:  {row['volume']}")
             print(f"  Distance from 50/50: {row['distance_from_50']*100}c")
