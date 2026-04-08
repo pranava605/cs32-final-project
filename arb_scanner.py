@@ -36,5 +36,11 @@ if __name__ == "__main__":
     if not df.empty:
         for i, row in df.iterrows():
             print(f"\n{'='*50}")
-            
-        print(df.to_string(index=False))
+            print(f"  MARKET {i+1}")
+            print(f"{'='*50}")
+            print(f"  Ticker:  {row['ticker']}")
+            print(f"  Title:   {row['title']}")
+            print(f"  Yes Bid: {row['yes_bid']}  |  Yes Ask: {row['yes_ask']}")
+            print(f"  No Bid:  {row['no_bid']}  |  No Ask:  {row['no_ask']}")
+            print(f"  Volume:  {row['volume']}")
+            print(f"  Distance from 50/50: {row['distance_from_50']}")
