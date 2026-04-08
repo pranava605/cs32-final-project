@@ -31,8 +31,8 @@ def most_contested_markets(n=10):
             "title": title,
             "yes_bid": yes_bid,
             "yes_ask": yes_ask,
-            "no_bid": market.get("no_bid_dollars"),
-            "no_ask": market.get("no_ask_dollars"),
+            "no_bid": no_bid,
+            "no_ask": no_ask,
             "volume": market.get("volume_fp"),
             "distance_from_50": round(distance_from_50, 4)})
 
