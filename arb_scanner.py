@@ -26,12 +26,6 @@ def most_contested_markets(n=10):
         # makes sure yes_ask is a number not a string
         yes_ask = float(yes_ask)
 
-        if not ticker.startswith("KXNBA"):
-            continue
-
-        if "20+" not in title and "25+" not in title:
-            continue
-
         # closer to 0.5 the more contested the outcome
         distance_from_50 = abs(yes_ask - 0.50)
 
