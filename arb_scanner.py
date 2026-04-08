@@ -2,14 +2,16 @@ import pandas as pd
 from kalshi_client import get_markets
 
 def most_contested_markets(n=10):
+    # get the live markets from Kalshi
     markets = get_markets()
-    print(markets[0].keys())
     if not markets:
         return pd.DataFrame()
 
     contested = []
 
     for market in markets:
+        # get the relevant data fields needed
+
         yes_ask = market.get("yes_ask_dollars")
         no_bid = market.get("no_bid_dollars")
 
@@ -17,6 +19,7 @@ def most_contested_markets(n=10):
         title = market.get("title", "Unknown")
         volume = market.get("volume_fp")
 
+        # don't consider markets without price data
         if yes_ask is None:
             continue
 
