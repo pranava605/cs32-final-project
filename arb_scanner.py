@@ -34,4 +34,7 @@ def most_contested_markets(n=10):
 if __name__ == "__main__":
     df = most_contested_markets()
     if not df.empty:
+        for i, row in df.iterrows():
+            print(f"\n{'='*50}")
+            
         print(df.to_string(index=False))
