@@ -20,11 +20,11 @@ def most_contested_markets(n=10):
         title = market.get("title", "Unknown")
         volume = market.get("volume_fp")
 
-        if yes_price is None:
+        if yes_ask is None:
             continue
 
-        yes_price = float(yes_price)
-        distance_from_50 = abs(yes_price - 0.50)
+        yes_ask = float(yes_ask)
+        distance_from_50 = abs(yes_ask - 0.50)
 
         contested.append({
             "ticker": ticker,
@@ -52,4 +52,4 @@ if __name__ == "__main__":
             print(f"  Yes Bid: {row['yes_bid']*100:.0f}c  |  Yes Ask: {row['yes_ask']*100:.0f}c")
             print(f"  No Bid:  {row['no_bid']*100:.0f}c  |  No Ask:  {row['no_ask']*100:.0f}c")
             print(f"  Volume:  {row['volume']}")
-            print(f"  Distance from 50/50: {row['distance_from_50']}")
+            print(f"  Distance from 50/50: {row['distance_from_50']*100}c")
