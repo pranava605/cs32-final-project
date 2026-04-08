@@ -6,8 +6,6 @@ from kalshi_client import get_markets
 def most_contested_markets(n=10):
     # get the live markets from Kalshi
     markets = get_markets()
-    if not markets:
-        return pd.DataFrame()
 
     contested = []
 
