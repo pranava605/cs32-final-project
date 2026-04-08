@@ -5,7 +5,6 @@ def most_contested_markets(n=10):
     markets = get_markets()
     print(markets[0].keys())
     if not markets:
-        print("No markets fetched.")
         return pd.DataFrame()
 
     contested = []
