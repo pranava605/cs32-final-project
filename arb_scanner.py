@@ -33,7 +33,7 @@ def most_contested_markets(n=10):
             "yes_ask": yes_ask,
             "no_bid": no_bid,
             "no_ask": no_ask,
-            "volume": market.get("volume_fp"),
+            "volume": volume,
             "distance_from_50": round(distance_from_50, 4)})
 
     df = pd.DataFrame(contested)
