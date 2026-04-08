@@ -10,6 +10,8 @@ def most_contested_markets(n=10):
     contested = []
 
     for market in markets:
+        yes_bid = market.get("yes_bid_dollars")
+        no_bid = market.get("no_bid_dollars")
         ticker = market.get("ticker")
         title = market.get("title", "Unknown")
         yes_price = market.get("yes_ask_dollars")
@@ -23,9 +25,12 @@ def most_contested_markets(n=10):
         contested.append({
             "ticker": ticker,
             "title": title,
+            "yes_bid": market.get("yes_bid_dollars"),
             "yes_ask": yes_price,
-            "distance_from_50": round(distance_from_50, 4)
-        })
+            "no_bid": market.get("no_bid_dollars"),
+            "no_ask": market.get("no_ask_dollars"),
+            "volume": market.get("volume_fp"),
+            "distance_from_50": round(distance_from_50, 4)})
 
     df = pd.DataFrame(contested)
     df = df.sort_values("distance_from_50", ascending=True)
