@@ -23,6 +23,9 @@ def most_contested_markets(n=10):
         if yes_ask is None:
             continue
 
+        if no_bid is None:
+            continue
+
         # makes sure yes_ask is a number not a string
         yes_ask = float(yes_ask)
 
