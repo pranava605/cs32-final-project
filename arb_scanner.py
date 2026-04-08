@@ -10,11 +10,8 @@ def most_contested_markets(n=10):
     contested = []
 
     for market in markets:
-        yes_bid = market.get("yes_bid_dollars")
-        no_bid = market.get("no_bid_dollars")
-
         yes_ask = market.get("yes_ask_dollars")
-        no_ask = market.get("no_ask_dollars")
+        no_bid = market.get("no_bid_dollars")
 
         ticker = market.get("ticker")
         title = market.get("title", "Unknown")
@@ -29,10 +26,8 @@ def most_contested_markets(n=10):
         contested.append({
             "ticker": ticker,
             "title": title,
-            "yes_bid": yes_bid,
             "yes_ask": yes_ask,
             "no_bid": no_bid,
-            "no_ask": no_ask,
             "volume": volume,
             "distance_from_50": round(distance_from_50, 4)})
 
@@ -49,7 +44,6 @@ if __name__ == "__main__":
             print(f"{'='*50}")
             print(f"  Ticker:  {row['ticker']}")
             print(f"  Title:   {row['title']}")
-            print(f"  Yes Bid: {float(row['yes_bid'])*100:.0f}c  |  Yes Ask: {float(row['yes_ask'])*100:.0f}c")
-            print(f"  No Bid:  {float(row['no_bid'])*100:.0f}c  |  No Ask:  {float(row['no_ask'])*100:.0f}c")
+            print(f"  Yes Ask: {float(row['yes_ask'])*100:.0f}c  |  No Bid: {float(row['no_bid'])*100:.0f}c")
             print(f"  Volume:  {row['volume']}")
             print(f"  Distance from 50/50: {row['distance_from_50']*100}c")
