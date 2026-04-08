@@ -1,5 +1,7 @@
 import pandas as pd
+# gets all the functions from pandas library
 from kalshi_client import get_markets
+#
 
 def most_contested_markets(n=10):
     # get the live markets from Kalshi
