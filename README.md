@@ -42,5 +42,5 @@ Finally, last but not least, we have the file that runs it all, and brings all o
 
 To run the program, we use **ronak_main.py**.
 
-
+For a more detailed explanation of our individual lines of code (as of 4/23), we created a writeup: https://docs.google.com/document/d/1QQtO2cEXMRyxlXfbl-OIohwWmz-HlPCNTmP2Y2e6-PY/edit?tab=t.0
 
