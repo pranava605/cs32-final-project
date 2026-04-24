@@ -24,6 +24,7 @@ class Bets:
             "price": price
         }
 
+        # add to list of bets
         self.bets.append(bet)
         print(f'Purchased {contracts} contracts at ${price} each for {title}: {yes_no}')
 
@@ -44,8 +45,10 @@ class Bets:
             return None
 
         count = 0
-        total_value = 0.0
-        total_open_pnl = 0.0
+        total_value = 0
+        total_open_pnl = 0
+
+        # checks 
 
         for bet in self.bets:
             count += 1
@@ -79,6 +82,7 @@ class Bets:
             # ai added for p&l
             print(f'Total open P&L: ${total_open_pnl}')
 
+    # checks value
     def value(self, ticker, current_price):
         current_price = float(current_price)
         bet_exists = False
@@ -93,6 +97,8 @@ class Bets:
                 current_value = current_price * contracts
                 profit = current_value - cost
 
+                # prints info
+
                 print("\n Current Value:")
                 print(f'entry price: ${buy_price}')
                 print(f'current price: ${current_price}')
@@ -102,6 +108,10 @@ class Bets:
 
         if not bet_exists:
             print("No bet found.")
+
+
+    # if they decide to sell, we do most of the same stuff as checking the price, 
+    # except actually sell it and change self.cash
 
     def resolve(self, ticker, current_price):
         current_price = float(current_price)
