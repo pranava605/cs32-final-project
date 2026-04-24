@@ -39,13 +39,14 @@ def display():
         if market_number == "":
             continue
 
+        # make sure the input they gave is valid
         if market_number.isdigit():
             number = int(market_number)
             if number < 1 or number > len(markets):
                 print("Invalid number")
                 continue
         
-        # indexing
+        # indexing for the actual market
             selected_market = markets[number - 1]
             return selected_market
         
