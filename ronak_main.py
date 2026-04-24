@@ -30,6 +30,7 @@ def main():
         print(f'YES: {yes_price}  NO: {no_price}')
         print(f'volume: {volume} \n')
 
+        # prints options
         print("\n What would you like to do? \n")
         print("1. Buy YES")
         print("2. Buy NO")
@@ -38,8 +39,10 @@ def main():
         print("5. Go back to the list of markets")
         print("6. Quit")
         
+        
         choice = input("\n Choice Number: \n")
         
+        # gives options, runs functions to buy yes/no, show, etc
         if choice == "1":
             contracts = int(input(f'How many YES contracts of \"{title}\" do you want to buy? '))
             bets.buy(ticker, title, "YES", contracts, yes_price)
