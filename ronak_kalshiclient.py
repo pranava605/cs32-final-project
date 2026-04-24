@@ -52,13 +52,18 @@ def trump_markets():
         if next_cursor is not None:
             specifics_data["cursor"] = next_cursor
 
+        # Basically, we are sending the cursor to Kalshi to request the next page. 
+        # Kalshi gives us back a new cursor for the next page (from our kalshi_data variable),
+        # and we keep going with this until we’ve gone through all the data.
+
+
         kalshi_data = kalshi_request("/events", specifics_data)
         # kalshi_data is a dictionary with all the returned info, but this has a lot of info
 
         # we  want the list of events on the page
         events_list = kalshi_data.get("events", [])
 
-        # events list only has one page of data, so we need to add them all to the overall list
+        # events list only has one page of data, so we need to add them all to the overall list by looping through each events markets
         for event in events_list:
             event_ticker = event.get("event_ticker", "")
             if "TRUMP" in event_ticker.upper():
