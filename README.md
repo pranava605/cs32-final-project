@@ -3,7 +3,7 @@ My CS32 Final Project with Ronak and Rishab
 
 This project connects to Kalshi's public API to fetch live prediction market data.
 
-The core goal is to build a live market analysis tool that scans active
+As of now, the core goal is to build a live market analysis tool that scans active
 markets and computes key statistics including:
 
 All statistics are computed from live data, organized into a clean data frame,
