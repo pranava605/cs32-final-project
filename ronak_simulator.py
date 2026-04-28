@@ -1,3 +1,5 @@
+import time
+
 class Bets:
     def __init__(self, money = 100000.0):
         self.cash = money
@@ -33,7 +35,7 @@ class Bets:
 
     def show_bets(self, current_prices=None):
         # current_prices (optional): {ticker: {"YES": yes_ask, "NO": no_ask}} 
-        print("\n Your Bets")
+        print("\nYour Bets")
         print(f'Cash: ${self.cash}')
 
         # ai added these 2 lines to show realized p&l
@@ -41,7 +43,10 @@ class Bets:
         print(f'Realized P&L: ${realized}')
 
         if self.bets == []:
-            print("No bets yet")
+            print("\nNo bets yet.")
+            time.sleep(3)
+            print("\nReturning to Main Menu.")
+            time.sleep(3)
             return None
 
         count = 0
@@ -99,7 +104,7 @@ class Bets:
 
                 # prints info
 
-                print("\n Current Value:")
+                print("\nCurrent Value:\n")
                 print(f'entry price: ${buy_price}')
                 print(f'current price: ${current_price}')
                 print(f'contracts: {contracts}')
@@ -128,13 +133,14 @@ class Bets:
 
                 self.cash += current_value
 
-                print("\n Bet Resolved:")
+                print("\nBet Resolved:")
                 print(f'entry price: ${buy_price}')
                 print(f'sale price: ${current_price}')
                 print(f'contracts: {contracts}')
                 print(f'money received: ${current_value}')
                 print(f'profit: ${profit}')
                 print(f'current cash balance: ${self.cash}')
+
 
                 # ai added for p&l appending after closing position
                 self.closed.append({
