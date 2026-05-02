@@ -1,5 +1,3 @@
-import time
-
 class Bets:
     def __init__(self, money = 100000.0):
         self.cash = money
@@ -35,7 +33,7 @@ class Bets:
 
     def show_bets(self, current_prices=None):
         # current_prices (optional): {ticker: {"YES": yes_ask, "NO": no_ask}} 
-        print("\nYour Bets")
+        print("\n Your Bets")
         print(f'Cash: ${self.cash}')
 
         # ai added these 2 lines to show realized p&l
@@ -43,10 +41,7 @@ class Bets:
         print(f'Realized P&L: ${realized}')
 
         if self.bets == []:
-            print("\nNo bets yet.")
-            time.sleep(3)
-            print("\nReturning to Main Menu.")
-            time.sleep(3)
+            print("No bets yet")
             return None
 
         count = 0
@@ -88,11 +83,13 @@ class Bets:
             print(f'Total open P&L: ${total_open_pnl}')
 
     # checks value
-    def value(self, ticker, current_price):
+    # optional yes_no filter so callers can target one side when both YES and NO are held
+    def value(self, ticker, current_price, yes_no=None):
         current_price = float(current_price)
         bet_exists = False
         for bet in self.bets:
-            if bet["ticker"] == ticker:
+            # only show bets matching the requested side (or all sides when yes_no is None)
+            if bet["ticker"] == ticker and (yes_no is None or bet["yes_no"] == yes_no):
                 bet_exists = True
 
                 contracts = bet["contracts"]
@@ -104,7 +101,7 @@ class Bets:
 
                 # prints info
 
-                print("\nCurrent Value:\n")
+                print("\n Current Value:")
                 print(f'entry price: ${buy_price}')
                 print(f'current price: ${current_price}')
                 print(f'contracts: {contracts}')
@@ -118,11 +115,14 @@ class Bets:
     # if they decide to sell, we do most of the same stuff as checking the price, 
     # except actually sell it and change self.cash
 
-    def resolve(self, ticker, current_price):
+    def resolve(self, ticker, current_price, yes_no=None):
+        # ai added optional yes_no filter so callers can target a specific side
+        # when the same ticker is held on both YES and NO. Default None preserves
+        # original behavior (close the first matching ticker) for the CLI.
         current_price = float(current_price)
 
         for bet in self.bets:
-            if bet["ticker"] == ticker:
+            if bet["ticker"] == ticker and (yes_no is None or bet["yes_no"] == yes_no):
 
                 contracts = bet["contracts"]
                 buy_price = bet["price"]
@@ -133,14 +133,13 @@ class Bets:
 
                 self.cash += current_value
 
-                print("\nBet Resolved:")
+                print("\n Bet Resolved:")
                 print(f'entry price: ${buy_price}')
                 print(f'sale price: ${current_price}')
                 print(f'contracts: {contracts}')
                 print(f'money received: ${current_value}')
                 print(f'profit: ${profit}')
                 print(f'current cash balance: ${self.cash}')
-
 
                 # ai added for p&l appending after closing position
                 self.closed.append({
@@ -155,8 +154,42 @@ class Bets:
                 self.bets.remove(bet)
                 break
 
+    # helper functions that help the calculations for the app
 
-        return None
+    def calc_open_pnl(self, get_price_fn):
+        # start w/ 0 profit
+        total = 0.0
+        # loop through each open bet
+        for bet in self.bets:
+            # get current price by looking at the market and side
+            current_price = get_price_fn(bet["ticker"], bet["yes_no"])
+            # if we get a price back
+            if current_price:
+                # add (current price - entry price) * total contracts to total profit
+                total += (current_price - float(bet["price"])) * int(bet["contracts"])
+        return total
+
+    def calc_realized_pnl(self):
+        # start with zero realized pnl
+        total = 0.0
+        # loop through each closed bet
+        for closed_bet in self.closed:
+            # add profit to realized pnl total
+            total += closed_bet["profit"]
+        return total
+
+    def calc_portfolio_value(self, get_price_fn):
+        # start with zero
+        open_value = 0.0
+        # loop through open bets
+        for bet in self.bets:
+            current_price = get_price_fn(bet["ticker"], bet["yes_no"])
+            # if there is no price fetched use entry price to ensure it doesn't crash
+            if current_price is None:
+                current_price = float(bet["price"])
+            # portfolio calculation
+            open_value += current_price * int(bet["contracts"])
+        return self.cash + open_value
 
 
 
