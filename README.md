@@ -3,13 +3,15 @@ CS32 Final Project with Pranav, Ronak, and Rishab
 
 This project connects to Kalshi's public API to fetch live prediction market data.
 
-As of now, the core goal is to build a live market analysis tool that scans active
-markets and computes key statistics including:
+We have built a live market analysis tool that scans active
+markets and computes an orderbook, notification system, and paper trading simulator.
+
+In particular, the orderbook and notification system are additions that Kalshi doesn't have. The notification system provides price notifications for markets. Currently, users would have to manually check each individual market over and over for this (one at a time), but our notification system allows tracking across many different markets simultaneously.
 
 All statistics are computed from live data, organized into a clean data frame,
-and displayed in a readable table that refreshes on a timer. 
+and displayed in a readable table (our list of markets) that refreshes on a timer.
 
-Right now, it includes a few things, the main of which is a paper trading simulator. However, the core of this is an **API**, which we need to get the data from Kalshi. We needed to install **requests**, which we do by using **python3 -m pip install requests**
+The core of this is an **API**, which we need to get the data from Kalshi. We needed to install **requests**, which we do by using **python3 -m pip install requests**
 
 Throughout the project, we wrote most of the code, and the way we used generative AI was to protect our code from potential errors and to improve its efficiency.
 
@@ -22,6 +24,8 @@ There are seven files included:
 - ronak_main.py
 - requirements.txt
 - app.py
+
+Overviews of each are listed below.
 _________________________________________________________
 
 **ronak_kalshiclient.py:**
