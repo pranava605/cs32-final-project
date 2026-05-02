@@ -85,15 +85,11 @@ def market_prices(ticker):
     # no specifics since we are specifying a link
     # use an f string to go straight to the market using the ticker
 
-    market_data = kalshi_data["market"]
+    # ai added .get() chains so a failed kalshi_request (returns {}) or a
+    # market object missing fields gives None values instead of KeyError
+    market_data = kalshi_data.get("market") or {}
 
-    yes_ask = market_data["yes_ask_dollars"]
-    no_ask = market_data["no_ask_dollars"]
-    # these prices are in dollars, like 0.62
-
-    prices = {
-        "yes_ask": yes_ask,
-        "no_ask": no_ask
+    return {
+        "yes_ask": market_data.get("yes_ask_dollars"),
+        "no_ask":  market_data.get("no_ask_dollars"),
     }
-
-    return prices
