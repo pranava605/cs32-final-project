@@ -30,14 +30,11 @@ def display():
             count += 1
 
             print(f'{count}. {title}')
-            print(f'YES: {yes_price}  NO: {no_price}')
+            print(f'YES: {float(yes_price):.3f}  NO: {float(no_price):.3f}')
             print(f'volume: {volume} \n')
         
-        print("Type the number of the market you want. \nOr press Enter to refresh the market list.\nType quit to go back.")
+        print("Type the number of the market you want. \nOr press Enter to refresh the market list.")
         market_number = input("Market: ")
-
-        if market_number.lower() == "quit":
-            return None
 
         if market_number == "":
             continue
@@ -56,3 +53,9 @@ def display():
         else:
             print("Invalid number. Type the number of the market you want. \n Or press Enter to refresh the market list.")
             continue
+            
+        
+        
+
+
+            
